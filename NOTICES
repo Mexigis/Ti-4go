@@ -1,0 +1,42 @@
+# NOTICES — Ti-4GO
+
+Motor de rastreo geoespacial y visualización de campo.
+Copyright 2026 PPcoyente Group · MexiGIS Labs.
+
+## Licencia del proyecto
+
+Ti-4GO se distribuye bajo Apache License 2.0 (ver LICENSE).
+Atribución requerida al redistribuir: «Ti-4GO · PPcoyente Group · MexiGIS Labs»
+y conservación de este archivo.
+
+## Componentes de terceros incluidos
+
+- **React** y **React DOM** (react, react-dom) — Meta Platforms, Inc.
+  Licencia: MIT.
+- **Radix UI Primitives** (@radix-ui/react-*) — WorkOS.
+  Licencia: MIT.
+- **Lucide** (lucide-react) — Lucide Contributors.
+  Licencia: ISC.
+- **Next.js** (next) — Vercel.
+  Licencia: MIT.
+
+Este repositorio NO incluye los fuentes de terceros: se instalan vía
+`bun install` desde el manifiesto `package.json`.
+
+## Tipografías
+
+La UI del shell puede referenciar la familia **Geist** (Vercel — SIL Open Font
+License 1.1) por nombre: este repositorio NO distribuye archivos de fuentes.
+El componente web embebible usa la pila del sistema (`system-ui`) con
+degradación transparente.
+
+## Datos
+
+- Las 4 semillas de terreno incluidas son 100 % procedurales (fórmula MXP1):
+  no contienen ni derivan de datos reales.
+- El diseño del catálogo de regiones es referencial al Marco Geoestadístico
+  Nacional de INEGI (México). Este repositorio NO incluye ningún dato de
+  INEGI ni de terceros. Los datos oficiales de INEGI (Marco Geoestadístico
+  Nacional, Modelos Digitales de Elevación) son de acceso libre y NO viajan
+  dentro de este repositorio; para uso productivo obténgalos de la fuente
+  oficial (https://www.inegi.org.mx/) y respete sus términos.

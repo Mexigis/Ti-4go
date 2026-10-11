@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"nombre":"Línea eléctrica sintética"},"geometry":{"type":"LineString","coordinates":[[-101.34,20.99],[-101.332,20.998],[-101.324,21.004]]}},{"type":"Feature","properties":{"nombre":"Punto de muestreo"},"geometry":{"type":"Point","coordinates":[-101.336,21.002]}}]}

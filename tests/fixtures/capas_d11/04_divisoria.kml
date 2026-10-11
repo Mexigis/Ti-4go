@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Capa D11 sintética: divisoria (FR-W1)</name>
+    <ExtendedData>
+      <Data name="layerType"><value>divisoria</value></Data>
+    </ExtendedData>
+    <Placemark>
+      <name>divisoria sintético</name>
+      <LineString><coordinates>-101.362,21.0314,2095 -101.3478,21.0296,2095 -101.3336,21.0278,2095 -101.3194,21.026,2095 -101.3052,21.0242,2095 -101.291,21.0224,2095</coordinates></LineString>
+    </Placemark>
+  </Document>
+</kml>

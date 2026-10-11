@@ -1,0 +1,334 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================================
+   DESIGN TOKENS — Sistema dual Dark/Day (design-tokens.json v1.0.0, DTCG)
+   ============================================================================
+   Fuente maestra: /design-tokens.json (Style Dictionary v4 compatible).
+   Este archivo es el puente de consumo en runtime:
+
+     :root, .dark  → tokens del modo DARK  (operación crítica nocturna;
+                     default pre-JS: coincide con el SSR del visor)
+     .day          → tokens del modo DAY   (campo abierto, alta luz)
+
+   El tema lo gestiona next-themes con estrategia de clase en <html>
+   (classes «dark» | «day», storage «ti4go-theme»). Las variables del puente
+   shadcn (--background, --card…) referencian SIEMPRE las variables --dt-*,
+   por lo que se re-resuelven solas al cambiar la clase del modo.
+
+   Nota de acento: el sistema de tokens es monocromático; el naranja #f97316
+   es la capa semántica fija del LIENZO cartográfico (curvas maestras, gizmo,
+   acento interactivo — README §0-b). No es un token de superficie: se consume
+   como --accent-strong y sigue prohibido el azul/índigo.
+   ========================================================================== */
+
+/* ------------------------------------------------------------------ */
+/* Utilidades Tailwind derivadas de los tokens                        */
+/* ------------------------------------------------------------------ */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans), "Inter", "SF Pro Text", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-geist-mono), "JetBrains Mono", "SF Mono", "Cascadia Code", Consolas, monospace;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* — tokens semánticos de color (design-tokens.json · color.semantic) — */
+  --color-canvas: var(--dt-canvas);           /* bg.canvas           */
+  --color-surface: var(--dt-surface);         /* bg.surface          */
+  --color-raised: var(--dt-raised);           /* bg.raised           */
+  --color-overlay: var(--dt-overlay);         /* bg.overlay          */
+  --color-fg: var(--dt-fg);                   /* fg.text.primary     */
+  --color-fg-secondary: var(--dt-fg-secondary); /* fg.text.secondary */
+  --color-fg-tertiary: var(--dt-fg-tertiary);   /* fg.text.tertiary  */
+  --color-vector: var(--dt-vector);           /* stroke.vector       */
+  --color-grid: var(--dt-grid);               /* stroke.grid         */
+  --color-line-subtle: var(--dt-border-subtle); /* border.subtle    */
+  --color-line-strong: var(--dt-border-strong); /* border.strong    */
+  --color-accent-strong: #f97316;             /* acento cartográfico fijo */
+
+  /* Acento interactivo dual: los tonos claros de naranja usados como TEXTO
+     (orange-300/400) suben a orange-700/600 en modo día por contraste sobre
+     superficie blanca. orange-500 permanece constante (marca/lienzo). */
+  --color-orange-300: var(--dt-o300);
+  --color-orange-400: var(--dt-o400);
+
+  /* — tokens de elevación (design-tokens.json · elevation.semantic) — */
+  --shadow-card: var(--dt-elev-1);
+  --shadow-dropdown: var(--dt-elev-2);
+  --shadow-modal: var(--dt-elev-3);
+  --shadow-overlay: var(--dt-elev-4);
+  --shadow-critical: var(--dt-elev-5);
+
+  /* — tokens de motion (design-tokens.json · motion) — */
+  --ease-standard: var(--dt-ease-standard);
+  --ease-decelerate: var(--dt-ease-decelerate);
+  --ease-accelerate: var(--dt-ease-accelerate);
+  --ease-sharp: var(--dt-ease-sharp);
+}
+
+/* ------------------------------------------------------------------ */
+/* Modo DARK — valores primitivos (default: pre-JS y operación crítica) */
+/* ------------------------------------------------------------------ */
+:root,
+.dark {
+  color-scheme: dark;
+
+  /* color.primitive.dark */
+  --dt-canvas: #181c20;          /* background         */
+  --dt-surface: #22272e;         /* surface            */
+  --dt-raised: #2c333b;          /* surface-raised     */
+  --dt-overlay: #363d45;         /* surface-overlay    */
+  --dt-fg: #e6edf3;              /* text-primary       */
+  --dt-fg-secondary: #b1bac4;    /* text-secondary     */
+  --dt-fg-tertiary: #b1bac4;     /* tertiary → dark.secondary */
+  --dt-vector: #8b949e;          /* stroke-vector      */
+  --dt-grid: #30363d;            /* stroke.grid = border-subtle */
+  --dt-border-subtle: #30363d;
+  --dt-border-strong: #3d444d;
+
+  /* acento interactivo (dark = valores por defecto de la paleta Tailwind) */
+  --dt-o300: #fdba74;
+  --dt-o400: #fb923c;
+
+  /* elevation.primitive.dark (semantic: card/dropdown/modal/overlay/critical) */
+  --dt-elev-1: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --dt-elev-2: 0 4px 8px rgba(0, 0, 0, 0.45);
+  --dt-elev-3: 0 8px 16px rgba(0, 0, 0, 0.55);
+  --dt-elev-4: 0 16px 32px rgba(0, 0, 0, 0.65);
+  --dt-elev-5: 0 24px 48px rgba(0, 0, 0, 0.75);
+
+  /* motion (tokens compartidos; solo duration cambia por modo si se necesita) */
+  --dt-dur-instant: 50ms;
+  --dt-dur-fast: 150ms;
+  --dt-dur-normal: 250ms;
+  --dt-dur-slow: 400ms;
+  --dt-dur-deliberate: 600ms;
+  --dt-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --dt-ease-decelerate: cubic-bezier(0, 0, 0, 1);
+  --dt-ease-accelerate: cubic-bezier(0.3, 0, 1, 1);
+  --dt-ease-sharp: cubic-bezier(0.4, 0, 0.6, 1);
+
+  /* Paleta del LIENZO cartográfico — espejo de engine.ts COLORS.
+     Consume solo la leyenda HTML y elementos chrome que replican trazos. */
+  --cv-bg: #18181b;
+  --cv-minor: #7a7a85;
+  --cv-major: #f97316;
+  --cv-stream: rgba(161, 161, 170, 0.5);
+  --cv-divide: #fb923c;
+  --cv-node: rgba(249, 115, 22, 0.6);
+
+  /* ——— Puente shadcn/ui (semánticos → tokens; se re-resuelven en .day) ——— */
+  --radius: 8px; /* radius.md del sistema de tokens */
+  --background: var(--dt-canvas);
+  --foreground: var(--dt-fg);
+  --card: var(--dt-surface);
+  --card-foreground: var(--dt-fg);
+  --popover: var(--dt-raised);
+  --popover-foreground: var(--dt-fg);
+  --primary: var(--dt-fg);             /* component.button.primary: bg = fg.primary */
+  --primary-foreground: var(--dt-canvas); /* y su texto = bg.canvas                */
+  --secondary: var(--dt-raised);
+  --secondary-foreground: var(--dt-fg);
+  --muted: var(--dt-raised);
+  --muted-foreground: var(--dt-fg-secondary);
+  --accent: var(--dt-overlay);
+  --accent-foreground: var(--dt-fg);
+  --destructive: oklch(0.704 0.191 22.216); /* semántica de error (fuera del sistema monocromático) */
+  --border: var(--dt-border-subtle);
+  --input: var(--dt-border-strong);
+  --ring: #f97316;                     /* foco = acento interactivo del producto */
+  --chart-1: #f97316;
+  --chart-2: var(--dt-vector);
+  --chart-3: var(--dt-fg-secondary);
+  --chart-4: var(--dt-fg-tertiary);
+  --chart-5: var(--dt-grid);
+  --sidebar: var(--dt-surface);
+  --sidebar-foreground: var(--dt-fg);
+  --sidebar-primary: var(--dt-fg);
+  --sidebar-primary-foreground: var(--dt-canvas);
+  --sidebar-accent: var(--dt-overlay);
+  --sidebar-accent-foreground: var(--dt-fg);
+  --sidebar-border: var(--dt-border-subtle);
+  --sidebar-ring: #f97316;
+}
+
+/* ------------------------------------------------------------------ */
+/* Modo DAY — campo abierto, alta luz (design-tokens.json · day)      */
+/* Solo redefinen los primitivos: el puente shadcn re-resuelve solo.  */
+/* ------------------------------------------------------------------ */
+.day {
+  color-scheme: light;
+
+  /* color.primitive.day */
+  --dt-canvas: #efefef;          /* background                    */
+  --dt-surface: #ffffff;         /* surface                       */
+  --dt-raised: #fafafa;          /* surface-raised                */
+  --dt-overlay: #ffffff;         /* surface-overlay               */
+  --dt-fg: #2c2c2c;              /* text-primary                  */
+  --dt-fg-secondary: #666666;    /* text-secondary                */
+  --dt-fg-tertiary: #999999;     /* text-tertiary                 */
+  --dt-vector: #666666;          /* stroke-vector-primary         */
+  --dt-grid: #999999;            /* stroke.grid = vector-secondary */
+  --dt-border-subtle: #d9d9d9;
+  --dt-border-strong: #cccccc;
+
+  /* acento interactivo en día: sube de tono por contraste (orange-700/600) */
+  --dt-o300: #c2410c;
+  --dt-o400: #ea580c;
+
+  /* elevation.primitive.day */
+  --dt-elev-1: 0 1px 2px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+  --dt-elev-2: 0 2px 4px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.04);
+  --dt-elev-3: 0 4px 8px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.06);
+  --dt-elev-4: 0 8px 16px rgba(0, 0, 0, 0.12), 0 16px 32px rgba(0, 0, 0, 0.08);
+  --dt-elev-5: 0 16px 32px rgba(0, 0, 0, 0.14), 0 24px 48px rgba(0, 0, 0, 0.1);
+
+  /* Paleta del LIENZO en modo día — espejo de engine.ts DAY_COLORS.
+     Maestras/cotas suben a orange-600/700 por contraste sobre papel. */
+  --cv-bg: #efefef;
+  --cv-minor: #8b8b90;
+  --cv-major: #ea580c;
+  --cv-stream: rgba(113, 113, 122, 0.55);
+  --cv-divide: #ea580c;
+  --cv-node: rgba(234, 88, 12, 0.65);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Motion · reduce-motion (F4 accesibilidad, lado CSS)                */
+/* El motor ya congela vuelos e inercia; aquí se neutraliza el chrome. */
+/* ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* FR-6 · Modo Campo (scope del chrome del lienzo — spec R-A §3, R-2/R-3):
+   en campo NO hay animaciones ni transiciones del chrome — una animación
+   congelada sería deshonesta y gasta CPU (el canvas del motor nunca usó
+   CSS animation). Además, telemetría COLAPSADA (G-5 recomendado): HUD
+   numérico, leyenda y footer de estudio ocultos; la barra de campo muestra
+   estado + intervalo (FieldBar). El tema del chrome sigue al embedder
+   (G-3 pendiente del propietario; la polaridad del LIENZO ya es fija por
+   eink forzado). */
+.field-mode *,
+.field-mode *::before,
+.field-mode *::after {
+  animation: none !important;
+  transition: none !important;
+}
+.field-mode .ti4go-hud,
+.field-mode .ti4go-footer,
+.field-mode .ti4go-leyenda {
+  display: none;
+}
+
+/* R-2 · ergonomía táctil (A-11): en campo, TODO el chrome visible cumple
+   target ≥ 44 px CSS — variantes por clase, sin rediseño (spec §3 R-2).
+   min-height universal + min-width para piezas icónicas; el layout absorbe
+   el crecimiento (los targets de FieldBar ya nacen ≥44 y no cambian). */
+.field-mode button,
+.field-mode [role="button"],
+.field-mode [role="combobox"],
+.field-mode [role="switch"],
+.field-mode [role="checkbox"],
+.field-mode [role="tab"],
+.field-mode a[href] {
+  min-height: 44px;
+}
+.field-mode header button,
+.field-mode button[size="icon"],
+.field-mode .size-9,
+.field-mode .size-10,
+.field-mode .h-9,
+.field-mode .h-10 {
+  min-width: 44px;
+}
+/* Checkboxes de hachurado/tramas (16 px) y otros controles inline: alto 44,
+   ancho natural centrado — la fila crece, el card respira (sin rediseño). */
+.field-mode button[aria-label*="hachurado" i],
+.field-mode button[aria-label*="tramas" i] {
+  min-width: 44px;
+}
+/* R-2 · A-11: overlays PORTALIZADOS (drawer/Sheet, dropdowns, toasts) — viven
+   fuera de la raíz .field-mode; body.field-mode-host (sincronizado por el
+   viewer mientras dura el modo) extiende la ergonomía ≥44 px a su contenido. */
+body.field-mode-host [role="dialog"] button,
+body.field-mode-host [role="dialog"] [role="combobox"],
+body.field-mode-host [role="dialog"] [role="switch"],
+body.field-mode-host [role="dialog"] [role="checkbox"],
+body.field-mode-host [data-radix-popper-content-wrapper] button {
+  min-height: 44px;
+}
+body.field-mode-host [role="dialog"] [role="switch"],
+body.field-mode-host [role="dialog"] [role="checkbox"] {
+  min-width: 44px;
+}
+
+/* Scroll fino para paneles del visor — tokens stroke.grid/vector */
+.thin-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--dt-grid) transparent;
+}
+.thin-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.thin-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.thin-scroll::-webkit-scrollbar-thumb {
+  background: var(--dt-grid);
+  border-radius: 9999px;
+}
+.thin-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--dt-vector);
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Capa D11 sintética: ruta (FR-W1)</name>
+    <ExtendedData>
+      <Data name="layerType"><value>ruta</value></Data>
+    </ExtendedData>
+    <Placemark>
+      <name>ruta sintético</name>
+      <LineString><coordinates>-101.362,21.0188,2140 -101.3478,21.017,2140 -101.3336,21.0152,2140 -101.3194,21.0134,2140 -101.3052,21.0116,2140 -101.291,21.0098,2140</coordinates></LineString>
+    </Placemark>
+  </Document>
+</kml>

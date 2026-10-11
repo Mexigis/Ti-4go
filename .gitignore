@@ -1,0 +1,29 @@
+# dependencias
+node_modules/
+
+# builds
+.next/
+.next-airgap/
+out/
+build/
+*.tsbuildinfo
+next-env.d.ts.bak
+
+# entorno y datos locales (jamás versionar)
+.env
+.env.local
+db/*.db
+db/*.db-journal
+upload/
+downloads/
+download/
+
+# logs y residuos de plataforma
+dev.log
+server.log
+*.log
+tool-results/
+
+# sistema
+.DS_Store
+Thumbs.db

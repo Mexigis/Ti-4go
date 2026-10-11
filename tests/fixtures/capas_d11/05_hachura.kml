@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Capa D11 sintética: hachura (FR-W1)</name>
+    <ExtendedData>
+      <Data name="layerType"><value>hachura</value></Data>
+    </ExtendedData>
+    <Placemark>
+      <name>hachura sintético</name>
+      <LineString><coordinates>-101.362,21.0272,2110 -101.3478,21.0254,2110 -101.3336,21.0236,2110 -101.3194,21.0218,2110 -101.3052,21.02,2110 -101.291,21.0182,2110</coordinates></LineString>
+    </Placemark>
+  </Document>
+</kml>

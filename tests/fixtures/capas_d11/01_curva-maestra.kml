@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Capa D11 sintética: curva-maestra (FR-W1)</name>
+    <ExtendedData>
+      <Data name="layerType"><value>curva-maestra</value></Data>
+    </ExtendedData>
+    <Placemark>
+      <name>curva-maestra sintético</name>
+      <LineString><coordinates>-101.362,21.044,2050 -101.3478,21.0422,2050 -101.3336,21.0404,2050 -101.3194,21.0386,2050 -101.3052,21.0368,2050 -101.291,21.035,2050</coordinates></LineString>
+    </Placemark>
+  </Document>
+</kml>

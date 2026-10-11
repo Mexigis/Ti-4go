@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Capa D11 sintética: curva-intermedia (FR-W1)</name>
+    <ExtendedData>
+      <Data name="layerType"><value>curva-intermedia</value></Data>
+    </ExtendedData>
+    <Placemark>
+      <name>curva-intermedia sintético</name>
+      <LineString><coordinates>-101.362,21.0398,2065 -101.3478,21.038,2065 -101.3336,21.0362,2065 -101.3194,21.0344,2065 -101.3052,21.0326,2065 -101.291,21.0308,2065</coordinates></LineString>
+    </Placemark>
+  </Document>
+</kml>

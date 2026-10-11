@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Capa D11 sintética: vector (FR-W1)</name>
+    <ExtendedData>
+      <Data name="layerType"><value>vector</value></Data>
+    </ExtendedData>
+    <Placemark>
+      <name>vector sintético</name>
+      <LineString><coordinates>-101.362,21.023,2125 -101.3478,21.0212,2125 -101.3336,21.0194,2125 -101.3194,21.0176,2125 -101.3052,21.0158,2125 -101.291,21.014,2125</coordinates></LineString>
+    </Placemark>
+  </Document>
+</kml>

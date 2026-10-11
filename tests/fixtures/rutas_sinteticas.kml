@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Rutas sintéticas de brigada (FR-W1)</name>
+    <Placemark id="c0d1e2f3-3333-4444-8555-666677778888"><name>Ruta de ascenso</name>
+      <ExtendedData><Data name="layerType"><value>ruta</value></Data></ExtendedData>
+      <LineString><coordinates>-101.348,20.992,2100 -101.341,21,2100 -101.333,21.006,2100 -101.326,21.012,2100 -101.319,21.018,2100</coordinates></LineString>
+    </Placemark>
+    <Placemark id="b1b2c3d4-2222-4333-8444-555566667777"><name>Perímetro de interés</name>
+      <ExtendedData><Data name="layerType"><value>ruta</value></Data></ExtendedData>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>-101.322,21,2080 -101.313,21,2080 -101.313,21.009,2080 -101.322,21.009,2080 -101.322,21,2080</coordinates></LinearRing></outerBoundaryIs></Polygon>
+    </Placemark>
+  </Document>
+</kml>
