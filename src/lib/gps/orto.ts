@@ -8,10 +8,9 @@
  * consistencia contra las curvas del mapa (FR-7).
  *
  * PUERTO D-1 (directiva del propietario, agenda documento interno de reinicio §2.1,
- * 2026-10-02): núcleo puro del linaje local (`ventana-local-task47`,
- * custodia bundle `ventana-local-21328b2`) ADAPTADO a la arquitectura de
- * la bóveda — las rutas y contratos cambian, las REGLAS no:
- *   - geoid: la bóveda lo resuelve con `src/lib/ingest/geoid.ts`
+ * 2026-10-02): núcleo puro del linaje local ADAPTADO a la arquitectura
+ * del árbol — las rutas y contratos cambian, las REGLAS no:
+ *   - geoid: el árbol lo resuelve con `src/lib/ingest/geoid.ts`
  *     (`undulation` NaN-semantics, golden GGM25 doble lector) — no con el
  *     geoid del linaje local (`model.sample` null-semantics).
  *   - escena: mapeo `fixToSceneM` de `src/lib/gps/scene.ts` (equirectangular

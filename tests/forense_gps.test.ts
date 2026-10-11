@@ -287,7 +287,7 @@ describe('FR-7 · scene.ts (pura) y V-1 round-trip', () => {
 /* ------------------------------------------------------------------ */
 /* PUERTO D-1 — GPS-ORTO (gps/orto.ts): reglas FR-7 + consistencia     */
 /* ±1.0 m + demo FR-W1 + altitud del chip. Núcleo del linaje local     */
-/* (custodia ventana-local-task47) adaptado a la bóveda: geoid vía     */
+/* (linaje local) adaptado al árbol: geoid vía                         */
 /* src/lib/ingest/geoid.ts (NaN-semantics), escena vía fixToSceneM,    */
 /* MDT vía sampler inyectado (procedural o DEM REAL del CEM).          */
 /* ------------------------------------------------------------------ */

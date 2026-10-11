@@ -8,9 +8,8 @@
 /**
  * CurvasEmbed — el lienzo de curvas vivas como COMPONENTE EMBEBIBLE (WC).
  *
- * Visión (checkpoint de ingeniería; transplante D-2 del
- * linaje local custodiado `ventana-local-21328b2` al árbol unificado, trace
- * ``): «la capa viva de curvas en CADA pantalla» — el embed
+ * Visión (checkpoint de ingeniería; transplante D-2 al árbol unificado):
+ * «la capa viva de curvas en CADA pantalla» — el embed
  * se reutiliza en las 9 pantallas del Core Target (B-D1: múltiples
  * instancias simultáneas sin interferencia, cada una con su propio motor y
  * su propio modelo; 0 GPU, 0 red).

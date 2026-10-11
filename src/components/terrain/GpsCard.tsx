@@ -10,9 +10,9 @@
  * las curvas del mapa (± tolerancia declarada).
  *
  * PUERTO D-1 (agenda documento interno de reinicio §2.1, 2026-10-02): tarjeta del
- * linaje local (`ventana-local-task47`, custodia `ventana-local-21328b2`)
- * ADAPTADA a la arquitectura de la bóveda:
- *   - Estado GPS: el controlador SINGLETON de la bóveda (`useGpsState()` +
+ * linaje local
+ * ADAPTADA a la arquitectura del árbol:
+ *   - Estado GPS: el controlador SINGLETON del árbol (`useGpsState()` +
  *     `gpsController`, máquina de 9 estados, P-1/P-2/P-3) — no la máquina
  *     local del linaje (startGps propio).
  *   - Geoid activo: el store de ingesta (`useGeoidModels()`) — no el

@@ -6,16 +6,14 @@
 /**
  * gps.ts — muestreo del MDT para el breadcrumb (FR-W1).
  *
- * TRANSPLANTE INVERSO (directiva del propietario, opción A, trace
- * ``): módulo REDUCIDO del linaje local (ventana sandbox
- * paralela, Tasks 40–47, custodia `ventana-local-task47` + bundle
- * `downloads/custodia/ventana-local-21328b2.bundle`) — aquí vive SOLO
- * `sampleGridZ`, la dependencia de `src/lib/terrain/breadcrumb.ts`.
+ * TRANSPLANTE INVERSO (directiva del propietario, opción A): módulo
+ * REDUCIDO del linaje local — aquí vive SOLO `sampleGridZ`, la
+ * dependencia de `src/lib/terrain/breadcrumb.ts`.
  * El GPS-ORTO completo del linaje local (resolveCota · startGps ·
  * wgs84ToScene · curvasConsistency · simulateFixAt, con geoid propio) NO
- * se trasplantó: la bóveda resuelve la cota por su propia ruta (FR-7,
+ * se trasplantó: el árbol resuelve la cota por su propia ruta (FR-7,
  * `src/lib/gps/*` + `src/lib/ingest/geoid.ts`). El linaje local queda
- * custodiado íntegro en el bundle; su re-activación es decisión del
+ * custodiado íntegro en su linaje; su re-activación es decisión del
  * propietario.
  */
 import { sampleGrid, type Grid } from './generator';

@@ -34,7 +34,7 @@ const nextConfig: NextConfig = AIRGAP
       /* R-02 (roadmap atómico): silencia el aviso «Cross origin request detected
          from … to /_next/* resource» del sandbox de vista previa (gateway). Array
          seguro: localhost + dominios del preview (comodín de subdominios). */
-      allowedDevOrigins: ["localhost:3000", "127.0.0.1:3000", "space-z.ai", "*.space-z.ai"],
+      allowedDevOrigins: ["localhost:3000", "127.0.0.1:3000"],
       /* Refactor de calidad (Task 62) — cabeceras defensivas SIN impacto
          funcional (auditoría Task 60, hallazgo M-3): nosniff evita el
          sniffing de MIME; Referrer-Policy acota la fuga de URLs internas.

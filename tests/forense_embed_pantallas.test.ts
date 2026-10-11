@@ -6,7 +6,7 @@
 /**
  * D-2 RUTAS WC · forense del transplante de las 9 pantallas host (checkpoint
  * ): `CurvasEmbed` + `/pantallas` + `/embed` llegan
- * del linaje local custodiado (`ventana-local-21328b2.bundle`) al árbol
+ * del linaje local al árbol
  * unificado.
  *
  * Estrategia honesta (sin motor ni navegador real — la integración del

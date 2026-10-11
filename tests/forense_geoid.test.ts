@@ -518,7 +518,7 @@ describe('GGM25 REAL en custodia — golden re-estampada (cotejo doble lector)',
 /* ------------------------------------------------------------------ */
 /* PUERTO D-1 (GPS-ORTO) — épsilon de borde · NODATA-por-pesos ·       */
 /* lerp bit-exacto. Tres mejoras del linaje local (custodia            */
-/* `ventana-local-task47`, LEDGER DE DELTAS D-1) LATENTES con el       */
+/* (LEDGER DE DELTAS D-1) LATENTES con el                             */
 /* GGM25 real (0 NODATA) y REALES con cualquier grid con NODATA.       */
 /* ------------------------------------------------------------------ */
 describe('geoid.ts — PUERTO D-1: épsilon de borde · NODATA-por-pesos · lerp bit-exacto', () => {

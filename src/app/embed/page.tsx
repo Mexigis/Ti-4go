@@ -9,8 +9,8 @@
  * /embed — pantalla única embebible (iframe / vista de integración).
  *
  * Transplante D-2 (checkpoint ) desde el linaje
- * local custodiado (`ventana-local-21328b2.bundle`), con UNA adaptación
- * honesta a la arquitectura vigente: el host de la bóveda era Server
+ * local, con UNA adaptación
+ * honesta a la arquitectura vigente: el host original era Server
  * Component con `searchParams` — aquí es Componente Cliente
  * (`useSearchParams` + frontera Suspense) para seguir siendo compatible con
  * el export estático del vehículo air-gap (AIRGAP_EXPORT=1 ⇒ output:

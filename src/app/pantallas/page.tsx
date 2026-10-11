@@ -9,7 +9,7 @@
  * /pantallas — Tablero de las 9 pantallas del Core Target (visión revisión de ingeniería).
  *
  * Transplante D-2 (checkpoint ): ruta del linaje
- * local custodiado (`ventana-local-21328b2.bundle`) adaptada a la
+ * local adaptada a la
  * arquitectura unificada (tokens shadcn + catálogo REGIONS propio).
  *
  * El criterio de aceptación del ecosistema (directiva del propietario, trace

@@ -298,7 +298,7 @@ export function parseGgm25Zip(bytes: Uint8Array): GeoidRead {
  * geoide). NaN fuera de cobertura, en NODATA o con vecindad NODATA.
  *
  * PUERTO D-1 (GPS-ORTO, 2026-10-02): tres mejoras del linaje local
- * (`ventana-local-task47`, LEDGER DE DELTAS D-1 — informe de cierre
+ * (LEDGER DE DELTAS D-1 — informe de cierre
  * 2026-10-01 §4), de comportamiento LATENTE con el GGM25 real (0 celdas
  * NODATA ⇒ indistinguible) y REALES con cualquier grid con NODATA:
  *   1. Épsilon de borde (EPS=1e-9°): una coordenada EXACTA del borde

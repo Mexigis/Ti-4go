@@ -985,7 +985,7 @@ describe('FR-3 catálogo ZIP 24 hostiles', () => {
     expect({ match: e.crucesMATCH, diverge: e.crucesDIVERGE }).toEqual({ match: 3, diverge: 0 });
   });
 
-  // Público: el manifiesto DOCS es artefacto de la bóveda interna — se omite si no viaja (conteo honesto)
+  // Público: el manifiesto DOCS es artefacto interno — se omite si no viaja (conteo honesto)
   test.skipIf(!existsSync('downloads/DOCS_MANIFIESTO_SHA256.txt'))('H-2: manifiesto de docs — cada entrada SHA-256 del disco cuadra (integridad de gobernanza)', () => {
     const raw = readFileSync('downloads/DOCS_MANIFIESTO_SHA256.txt', 'utf8');
     const lines = raw
