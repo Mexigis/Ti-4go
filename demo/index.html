@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ti-4GO — visor público (demo)</title>
+  <style>
+    /* Fuentes del sistema — el kit no embebe ninguna fuente (ver NOTICES). */
+    :root {
+      --bg: #fafaf9; --fg: #1c1917; --card: #ffffff; --border: #e7e5e4;
+      --muted: #78716c; --accent: #9a3412; --ok: #166534;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #0c0a09; --fg: #fafaf9; --card: #1c1917; --border: #292524; --muted: #a8a29e; --accent: #fdba74; --ok: #4ade80; }
+    }
+    * { box-sizing: border-box; margin: 0; }
+    body {
+      background: var(--bg); color: var(--fg);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.5; padding: 16px;
+    }
+    header { border: 1px solid var(--border); border-radius: 12px; background: var(--card); padding: 16px 20px; margin-bottom: 16px; }
+    header h1 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+    header h1 small { font-weight: 500; color: var(--accent); margin-left: 8px; }
+    header p { color: var(--muted); font-size: 13px; margin-top: 2px; }
+    header a { color: var(--accent); font-size: 13px; }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    .card { border: 1px solid var(--border); border-radius: 12px; background: var(--card); overflow: hidden; }
+    .card h2 { font-size: 13px; font-weight: 600; padding: 10px 14px; border-bottom: 1px solid var(--border); }
+    .card h2 code { color: var(--accent); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .card h2 span { color: var(--muted); font-weight: 400; }
+    ti4go-viewer { display: block; width: 100%; height: 360px; }
+    @media (max-width: 899px) { ti4go-viewer { height: 300px; } }
+    .log { border: 1px solid var(--border); border-radius: 12px; background: var(--card); margin-top: 16px; }
+    .log h2 { font-size: 13px; font-weight: 600; padding: 10px 14px; border-bottom: 1px solid var(--border); }
+    .log pre {
+      padding: 12px 14px; font-size: 12px; max-height: 220px; overflow-y: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace; white-space: pre-wrap; word-break: break-all;
+    }
+    .log .ok { color: var(--ok); }
+    footer { color: var(--muted); font-size: 12px; margin: 16px 4px 8px; }
+    footer a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Ti-4GO — visor cartográfico determinista <small>demo pública</small></h1>
+    <p>Web Component &lt;ti4go-viewer&gt; · 0 GPU · 0 cuadros en reposo · offline · Shadow DOM</p>
+    <p><a href="https://github.com/Mexigis/Ti-4go">Repositorio (Apache 2.0)</a> · <a href="https://github.com/Mexigis/Ti-4go/releases">Kit de embed</a> · 4 semillas 100 % procedurales — cero datos reales</p>
+  </header>
+
+  <main class="grid">
+    <section class="card">
+      <h2><code>theme="dark"</code> <span>· región La Soledad</span></h2>
+      <ti4go-viewer id="v1" theme="dark" mode="field" url-sync="false"></ti4go-viewer>
+    </section>
+    <section class="card">
+      <h2><code>theme="day"</code> <span>· región Esperanza</span></h2>
+      <ti4go-viewer id="v2" theme="day" mode="expert" url-sync="false"></ti4go-viewer>
+    </section>
+    <section class="card">
+      <h2><code>theme="eink"</code> <span>· región La Bufa</span></h2>
+      <ti4go-viewer id="v3" theme="eink" mode="field" url-sync="false"></ti4go-viewer>
+    </section>
+    <section class="card">
+      <h2><code>theme="dark"</code> <span>· región Santa Rosa</span></h2>
+      <ti4go-viewer id="v4" theme="dark" mode="expert" url-sync="false"></ti4go-viewer>
+    </section>
+  </main>
+
+  <section class="log">
+    <h2>Registro de eventos (API en vivo)</h2>
+    <pre id="log">Cargando semillas…</pre>
+  </section>
+
+  <footer>
+    Licencia Apache 2.0 — PPcoyente Group · MexiGIS Labs ·
+    Todo el cómputo ocurre en tu navegador: 0 GPU, 0 servidores, 0 cuentas, 0 conexión. El mismo string de semilla produce el mismo terreno byte a byte.
+  </footer>
+
+  <!-- 1 · Carga el componente (una sola vez) -->
+  <script type="module" src="ti4go-viewer.js"></script>
+
+  <!-- 2 · Script consumidor: carga, encuadre y eventos -->
+  <script type="module">
+    /* Semillas procedurales públicas (mismo string ⇒ mismo terreno, byte a byte). */
+    const SEMILLAS = {
+      soledad:   'MXP1-eyJ2IjoyLCJpZCI6InNvbGVkYWQiLCJzIjoyMDI0MDYxMywibGF0IjoyMS4wNTE4LCJsb24iOi0xMDEuMzI0OCwiZSI6NjQwMCwiYiI6W1stNTAwLDM1MCwxNjUwLDMuNl0sWzE0NTAsLTQ1MCwxMjUwLDIuOV0sWy0xNTAwLC0xMjUwLDExNTAsMS40XSxbOTAwLDE1MDAsOTUwLDIuMl1dfQ.e0b19c08b20f5a18',
+      esperanza: 'MXP1-eyJ2IjoyLCJpZCI6ImVzcGVyYW56YSIsInMiOjc3NzAxLCJsYXQiOjIwLjk5NywibG9uIjotMTAxLjIyNjUsImUiOjcyMDAsImIiOltbLTIwMCwxMDAsMTgwMCwzLjVdLFstMTQwMCwtMTQwMCwxMTUwLDIuNl0sWzE1MDAsMTEwMCwxMjAwLDEuMl1dfQ.88e6b5741ae92a87',
+      bufa:      'MXP1-eyJ2IjoyLCJpZCI6ImJ1ZmEiLCJzIjo0MjQyNDIsImxhdCI6MjAuOTg3NywibG9uIjotMTAxLjM3ODUsImUiOjU2MDAsImIiOltbLTEwMCwxMDAsMTUwMCwzXSxbMTIwMCwtOTAwLDEwNTAsMS42XSxbLTExMDAsMTAwMCw5NTAsMi4zXV19.8b8d6b54c3a9aa4c',
+      santarosa: 'MXP1-eyJ2IjoyLCJpZCI6InNhbnRhcm9zYSIsInMiOjkxMDkxMywibGF0IjoyMS4wNzc1LCJsb24iOi0xMDEuNDQ2MywiZSI6OTIwMCwiYiI6W1swLDIwMCwxOTAwLDMuM10sWy0xNzAwLC0xMzAwLDE0MDAsMS4zXSxbMTYwMCwtODAwLDEzMDAsMi43XSxbNjAwLDE4MDAsMTEwMCwyXV19.b00e513ed77e6923',
+    };
+
+    const logEl = document.getElementById('log');
+    const log = (msg, ok = false) => {
+      if (logEl.dataset.limpio) { logEl.textContent = ''; delete logEl.dataset.limpio; }
+      const line = document.createElement('span');
+      if (ok) line.className = 'ok';
+      line.textContent = msg + '\n';
+      logEl.appendChild(line);
+    };
+    logEl.dataset.limpio = '1';
+
+    /* El error handler del demo: registra fallos reales. La notificación
+       «ResizeObserver loop completed with undelivered notifications» es ruido
+       benigno del navegador (entrega tardía de observadores), no un fallo del
+       visor — se filtra para no confundir. */
+    window.addEventListener('error', (e) => {
+      const msg = e.message || '';
+      if (msg.includes('ResizeObserver loop')) return;
+      log('ERROR: ' + msg);
+    });
+
+    const instancias = [
+      { v: document.getElementById('v1'), region: 'soledad',   etiqueta: 'La Soledad (dark)'  },
+      { v: document.getElementById('v2'), region: 'esperanza', etiqueta: 'Esperanza (day)'    },
+      { v: document.getElementById('v3'), region: 'bufa',      etiqueta: 'La Bufa (eink)'     },
+      { v: document.getElementById('v4'), region: 'santarosa', etiqueta: 'Santa Rosa (dark)'  },
+    ];
+
+    /* Eventos: el componente emite CustomEvent con e.detail tipado en el .d.ts */
+    for (const { v, etiqueta } of instancias) {
+      v.addEventListener('ti4go:layer-select', (e) => {
+        log('ti4go:layer-select · capa=' + e.detail.layerType + ' · uuid=' + e.detail.uuid + ' · id=' + e.detail.layerId);
+      });
+      let camUnica = false;
+      v.addEventListener('ti4go:camera-change', (e) => {
+        if (camUnica) return;
+        camUnica = true;
+        log('ti4go:camera-change · az=' + e.detail.az.toFixed(1) + ' el=' + e.detail.el.toFixed(1) + ' zoom=' + e.detail.zoom.toFixed(2));
+      });
+      v.addEventListener('ti4go:custody', (e) => {
+        log('ti4go:custody · packSha=' + (e.detail.packSha ?? 'null') + ' · triángulos=' + (e.detail.triangles ?? 'n/a'));
+      });
+      v.addEventListener('ti4go:divergence', (e) => {
+        log('ti4go:divergence · veredicto=' + e.detail.verdict);
+      });
+      void etiqueta;
+    }
+
+    /* Canal A — semilla MXP1: determinismo total.
+       El app del componente monta async (React dentro del Shadow DOM): hasta
+       que el api interno se registra, loadMissionPack rechaza con
+       «app no montado aún» — el patrón documentado es REINTENTAR. */
+    async function cargarConReintento(v, semilla, intentos = 60) {
+      let ultimoError;
+      for (let i = 0; i < intentos; i++) {
+        try {
+          return await v.loadMissionPack(semilla);
+        } catch (err) {
+          ultimoError = err;
+          if (!String(err).includes('no montado')) throw err; // fallo real
+          await new Promise((r) => setTimeout(r, 250));
+        }
+      }
+      throw ultimoError;
+    }
+
+    for (const { v, region, etiqueta } of instancias) {
+      try {
+        const receipt = await cargarConReintento(v, SEMILLAS[region]);
+        log('✓ ' + etiqueta + ' · formato=' + receipt.format + ' · custodia=' + receipt.custody, true);
+        if (receipt.verticalDatum) log('  datum vertical: ' + receipt.verticalDatum);
+      } catch (err) {
+        log('✗ ' + etiqueta + ' → ' + (err instanceof Error ? err.message : String(err)));
+      }
+    }
+
+    /* Encuadre: vuela la cámara al BBox (grados WGS84 [oeste, sur, este, norte]).
+       Devuelve false si el motor aún no tiene modelo — se reintenta. */
+    const v1 = instancias[0].v;
+    let volo = false;
+    for (let i = 0; i < 40 && !volo; i++) {
+      volo = v1.flyToBBox([-101.356, 21.022, -101.294, 21.081]);
+      if (!volo) await new Promise((r) => setTimeout(r, 250));
+    }
+    log(volo ? '✓ flyToBBox → cuenca de La Soledad encuadrada' : '· flyToBBox: escena aún no lista', volo);
+
+    /* setViewOpts: parchea capas — emite ti4go:layer-select igual que la UI */
+    v1.setViewOpts({ mesh: false });
+    log('✓ setViewOpts({mesh:false}) → toggles emiten el mismo evento que la UI', true);
+    log('— demo lista: haz clic en cualquier capa o arrastra la cámara —');
+  </script>
+</body>
+</html>
